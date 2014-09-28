@@ -36,7 +36,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'ERRORPAGESERROR'					=> 'Error pages',
 	
-    'ERROR_BAD_REQUEST' 				=> 'Bad Request',
+    	'ERROR_BAD_REQUEST' 				=> 'Bad Request',
 	'ERROR_BAD_REQUESTEXPA' 			=> 'The request had bad syntax or was inherently impossible to be completed.',
 	'ERROR_AUTH_REQUIRED' 				=> 'Authorization Required',
 	'ERROR_AUTH_REQUIREDEXPA' 			=> 'This means that the page requires that the visitors authenticate with their username and password. If they fail to do that, the server returns this error message.',
