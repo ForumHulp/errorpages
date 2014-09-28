@@ -14,21 +14,21 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
 {
-    protected $log;
+	protected $log;
 
-    public function __construct(\phpbb\log\log $log)
-    {
-        $this->log = $log;
-    }
+	public function __construct(\phpbb\log\log $log)
+	{
+		$this->log = $log;
+	}
 
 	public function onKernelException(GetResponseForExceptionEvent $event)
 	{
-        global $user;
+		global $user;
 		$user->add_lang_ext('forumhulp/errorpages', 'errorpages');
 
 		// Get the exception object from the received event
-        $exception = $event->getException();
-		
+		$exception = $event->getException();
+
 		switch ($exception->getStatusCode())
 		{
 			case '400':
@@ -101,7 +101,7 @@ class listener implements EventSubscriberInterface
 		}
 
 		$this->log->add('critical', $user->data['user_id'], $user->data['session_ip'], 'LOG_GENERAL_ERROR', false, array($user->lang[$msg], $exception->getMessage()));
-		
+
 		trigger_error($user->lang[$msg] . '<br />' . $user->lang[$msg.'EXPA'] . '<br /><br />' . sprintf($user->lang['RETURN_INDEX'], '<a href="/">', '</a>'));
 	}
 

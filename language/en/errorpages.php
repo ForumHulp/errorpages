@@ -12,12 +12,12 @@
 */
 if (!defined('IN_PHPBB'))
 {
-  exit;
+	exit;
 }
 
 if (empty($lang) || !is_array($lang))
 {
-  $lang = array();
+	$lang = array();
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -35,8 +35,8 @@ if (empty($lang) || !is_array($lang))
 // Custom error pages by stoker
 $lang = array_merge($lang, array(
 	'ERRORPAGESERROR'					=> 'Error pages',
-	
-    	'ERROR_BAD_REQUEST' 				=> 'Bad Request',
+
+	'ERROR_BAD_REQUEST' 				=> 'Bad Request',
 	'ERROR_BAD_REQUESTEXPA' 			=> 'The request had bad syntax or was inherently impossible to be completed.',
 	'ERROR_AUTH_REQUIRED' 				=> 'Authorization Required',
 	'ERROR_AUTH_REQUIREDEXPA' 			=> 'This means that the page requires that the visitors authenticate with their username and password. If they fail to do that, the server returns this error message.',
@@ -78,7 +78,6 @@ $lang = array_merge($lang, array(
 	'GATEWAY_TIMOUTEXPA' 				=> '',
 	'HTTP_VERSION_NOT_SUPPORTED' 		=> 'HTTP Version Not Supported',
 	'HTTP_VERSION_NOT_SUPPORTEDEXPA' 	=> '',
-    'ERROR_UNKNOWN'     	  		 	=> 'Unknown Server Error',
-    'ERROR_UNKNOWNEXPA'      		 	=> ''
-
+	'ERROR_UNKNOWN'     	  		 	=> 'Unknown Server Error',
+	'ERROR_UNKNOWNEXPA'      		 	=> ''
 ));
