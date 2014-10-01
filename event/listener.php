@@ -14,20 +14,24 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
 {
+	protected $config;
+	protected $user;
 	protected $log;
 
-	public function __construct(\phpbb\log\log $log)
+	public function __construct(\phpbb\config\config $config, \phpbb\user $user, \phpbb\log\log $log)
 	{
+		$this->config = $config;
+		$this->user = $user;
 		$this->log = $log;
 	}
 
 	public function onKernelException(GetResponseForExceptionEvent $event)
 	{
-		global $user;
-		$user->add_lang_ext('forumhulp/errorpages', 'errorpages');
+		$this->user->add_lang_ext('forumhulp/errorpages', 'info_acp_errorpages');
 
 		// Get the exception object from the received event
 		$exception = $event->getException();
+		$request = $event->getRequest();
 
 		switch ($exception->getStatusCode())
 		{
@@ -76,6 +80,9 @@ class listener implements EventSubscriberInterface
 			case '415':
 				$msg = 'UNSUPPORTED_MEDIA_TYPE';
 			break;
+			case '418':
+				$msg = 'TEAPOT';
+			break;
 
 			case '500':
 				$msg = 'INTERNAL_SERVER_ERROR';
@@ -100,9 +107,9 @@ class listener implements EventSubscriberInterface
 			break;
 		}
 
-		$this->log->add('critical', $user->data['user_id'], $user->data['session_ip'], 'LOG_GENERAL_ERROR', false, array($user->lang[$msg], $exception->getMessage()));
+		($this->config['error_pages_log']) ? $this->log->add('critical', $this->user->data['user_id'], $this->user->data['session_ip'], 'LOG_GENERAL_ERROR', false, array($exception->getStatusCode() . ': ' . $this->user->lang[$msg], $request->getPathInfo())) : null;
 
-		trigger_error($user->lang[$msg] . '<br />' . $user->lang[$msg.'EXPA'] . '<br /><br />' . sprintf($user->lang['RETURN_INDEX'], '<a href="/">', '</a>'));
+		trigger_error($this->user->lang[$msg] . '<br />' . (($this->config['error_pages_explain']) ? $this->user->lang[$msg.'EXPA'] : '') . '<br /><br />' . sprintf($this->user->lang['RETURN_INDEX'], '<a href="/">', '</a>'));
 	}
 
 	public static function getSubscribedEvents()
