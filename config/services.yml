@@ -4,6 +4,7 @@ services:
         arguments:
             - @config
             - @user
+            - @template
             - @log
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

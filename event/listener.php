@@ -10,18 +10,21 @@
 namespace forumhulp\errorpages\event;
 
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
 {
 	protected $config;
 	protected $user;
+	protected $template;
 	protected $log;
 
-	public function __construct(\phpbb\config\config $config, \phpbb\user $user, \phpbb\log\log $log)
+	public function __construct(\phpbb\config\config $config, \phpbb\user $user, \phpbb\template\template $template, \phpbb\log\log $log)
 	{
 		$this->config = $config;
 		$this->user = $user;
+		$this->template = $template;
 		$this->log = $log;
 	}
 
@@ -109,13 +112,25 @@ class listener implements EventSubscriberInterface
 
 		($this->config['error_pages_log']) ? $this->log->add('critical', $this->user->data['user_id'], $this->user->data['session_ip'], 'LOG_GENERAL_ERROR', false, array($exception->getStatusCode() . ': ' . $this->user->lang[$msg], $request->getPathInfo())) : null;
 
-		trigger_error($this->user->lang[$msg] . '<br />' . (($this->config['error_pages_explain']) ? $this->user->lang[$msg.'EXPA'] : '') . '<br /><br />' . sprintf($this->user->lang['RETURN_INDEX'], '<a href="/">', '</a>'));
+		page_header($this->user->lang('INFORMATION'));
+		$this->template->assign_vars(array(
+			'MESSAGE_TITLE'		=> $this->user->lang('INFORMATION'),
+			'MESSAGE_TEXT'		=> $this->user->lang[$msg] . '<br />' . (($this->config['error_pages_explain']) ? $this->user->lang[$msg.'EXPA'] : '') . '<br /><br />' . sprintf($this->user->lang['RETURN_INDEX'], '<a href="/">', '</a>'),
+		));
+
+		$this->template->set_filenames(array(
+			'body'	=> 'message_body.html',
+		));
+		page_footer(true, false, false);
+
+		$status_code = $exception instanceof HttpException ? $exception->getStatusCode() : 500;
+		$response = new Response($this->template->assign_display('body'), $status_code);
+		$event->setResponse($response);
 	}
 
 	public static function getSubscribedEvents()
 	{
-		return array_merge(array (
-			'core.common' => array('onKernelException', 2000),
-		));
+      return array (
+         KernelEvents::EXCEPTION => array('onKernelException', 2000));
 	}
 }
