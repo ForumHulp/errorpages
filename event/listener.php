@@ -130,7 +130,7 @@ class listener implements EventSubscriberInterface
 
 	public static function getSubscribedEvents()
 	{
-      return array (
-         KernelEvents::EXCEPTION => array('onKernelException', 2000));
+		return array (
+			KernelEvents::EXCEPTION => array('onKernelException', 2000));
 	}
 }
