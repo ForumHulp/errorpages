@@ -113,9 +113,10 @@ class listener implements EventSubscriberInterface
 		($this->config['error_pages_log']) ? $this->log->add('critical', $this->user->data['user_id'], $this->user->data['session_ip'], 'LOG_GENERAL_ERROR', false, array($exception->getStatusCode() . ': ' . $this->user->lang[$msg], $request->getPathInfo())) : null;
 
 		page_header($this->user->lang('INFORMATION'));
+		$url = generate_board_url();
 		$this->template->assign_vars(array(
 			'MESSAGE_TITLE'		=> $this->user->lang('INFORMATION'),
-			'MESSAGE_TEXT'		=> $this->user->lang[$msg] . '<br />' . (($this->config['error_pages_explain']) ? $this->user->lang[$msg.'EXPA'] : '') . '<br /><br />' . sprintf($this->user->lang['RETURN_INDEX'], '<a href="/">', '</a>'),
+			'MESSAGE_TEXT'		=> $this->user->lang[$msg] . '<br />' . (($this->config['error_pages_explain']) ? $this->user->lang[$msg.'EXPA'] : '') . '<br /><br />' . sprintf($this->user->lang['RETURN_INDEX'], '<a href="' . $url . '">', '</a>'),
 		));
 
 		$this->template->set_filenames(array(
