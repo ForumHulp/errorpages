@@ -1,31 +1,37 @@
 {
-	"name": "forumhulp/errorpages",
-	"type": "phpbb-extension",
-	"description": "Error Pages displays Apache errors in your forums style.",
-	"homepage": "http://forumhulp.com",
-	"version": "3.1.0",
-	"keywords": ["forumhulp", "phpbb", "extension", "error", "error pages"],
-	"license": "GPL-2.0",
-	"authors": [
-		{
-			"name": "John Peskens",
-			"homepage": "http://forumhulp.com",
-			"email": "info@forumhulp.com",
-			"role": "Developer"
-		}
-	],
-	"require": {
-		"php": ">=5.3.3"
-	},
-	"extra": {
-		"display-name": "Error pages",
-		"soft-require": {
-           "phpbb/phpbb": ">=3.1.*"
+    "name": "forumhulp/errorpages",
+    "type": "phpbb-extension",
+    "description": "Error Pages displays Apache errors in your forums style.",
+    "homepage": "http://forumhulp.com",
+    "version": "3.1.1",
+    "keywords": [
+        "forumhulp",
+        "phpbb",
+        "extension",
+        "error",
+        "error pages"
+    ],
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "John Peskens",
+            "homepage": "http://forumhulp.com",
+            "email": "info@forumhulp.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "extra": {
+        "display-name": "Error pages",
+        "soft-require": {
+            "phpbb/phpbb": ">=3.1.*"
         },
-		"version-check": {
-			"host": "forumhulp.com",
+        "version-check": {
+			"host": "forumhulp",
 			"directory": "/ext",
 			"filename": "index.php?id=35"
-		}
-	}
+        }
+    }
 }

@@ -39,6 +39,7 @@ $lang = array_merge($lang, array(
 	'ERRORPAGES_LOG_EXPLAIN'			=> 'Sla alle Error Pages op in Error Log onder Maintenance Tab',
 	'ERRORPAGES_EXPLAIN'				=> 'Uitleg Error Pages',
 	'ERRORPAGES_EXPLAIN_EXPLAIN'		=> 'Leg de foutmelding uit in het berichtenvenster',
+	'ERRORPAGE_NOTICE'					=> '<div class="phpinfo"><p class="entry">Config settings are in %1$s » %2$s » %3$s.</p></div>',
 	'ERROR_BAD_REQUEST' 				=> 'Foute aanvraag',
 	'ERROR_BAD_REQUESTEXPA' 			=> 'De aanvraag had een slechte syntax of kon onmogelijk worden uitgevoerd.',
 	'ERROR_AUTH_REQUIRED' 				=> 'Niet geautoriseerd',
@@ -84,5 +85,6 @@ $lang = array_merge($lang, array(
 	'HTTP_VERSION_NOT_SUPPORTED' 		=> 'HTTP-versie wordt niet ondersteund',
 	'HTTP_VERSION_NOT_SUPPORTEDEXPA' 	=> 'The server does not support the HTTP protocol version used in the request.',
 	'ERROR_UNKNOWN'     	  		 	=> 'Unbekende Server Fout',
-	'ERROR_UNKNOWNEXPA'      		 	=> ''
+	'ERROR_UNKNOWNEXPA'      		 	=> '',
+	'FH_HELPER_NOTICE'		=> 'Forumhulp helper application does not exist!<br />Download <a href="https://github.com/ForumHulp/helper" target="_blank">forumhulp/helper</a> and copy the helper folder to your forumhulp extension folder.',
 ));
