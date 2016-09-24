@@ -44,6 +44,7 @@ $lang = array_merge($lang, array(
 	'ERRORPAGES_LOG_EXPLAIN'			=> 'Archive toutes les pages d’erreurs rencontrées par les utilisateurs dans le journal des pages d’erreurs accessible depuis l’onglet « MAINTENANCE ».',
 	'ERRORPAGES_EXPLAIN'				=> 'Explications des pages d’erreurs',
 	'ERRORPAGES_EXPLAIN_EXPLAIN'		=> 'Permet de fournir une explication dans le message affiché sur la page d’erreur.',
+	'ERRORPAGE_NOTICE'					=> '<div class="phpinfo"><p class="entry">Les paramètres de cette extension se trouvent dans : %1$s » %2$s » %3$s.</p></div>',
 	'ERROR_BAD_REQUEST' 				=> 'Erreur 400 - Mauvaise requête',
 	'ERROR_BAD_REQUESTEXPA' 			=> 'La requête HTTP n’a pas pu être comprise par le serveur en raison d’une syntaxe erronée. Le problème peut provenir d’un navigateur web trop récent ou d’un serveur HTTP trop ancien.',
 	'ERROR_AUTH_REQUIRED' 				=> 'Erreur 401 - Non autorisé',
@@ -89,5 +90,6 @@ $lang = array_merge($lang, array(
 	'HTTP_VERSION_NOT_SUPPORTED' 		=> 'Erreur 505 - Version HTTP non supportée',
 	'HTTP_VERSION_NOT_SUPPORTEDEXPA' 	=> 'La version du protocole HTTP utilisée dans cette requête n’est pas (ou plus) supportée par le serveur.',
 	'ERROR_UNKNOWN'     	  		 	=> 'Erreur 520 - Erreur inconnue du serveur',
-	'ERROR_UNKNOWNEXPA'      		 	=> 'Le serveur renvoie une erreur inconnue.'
+	'ERROR_UNKNOWNEXPA'      		 	=> 'Le serveur renvoie une erreur inconnue.',
+	'FH_HELPER_NOTICE'      		 	=> 'L’extension : « Forumhulp Helper » n’est pas installée !<br />Il est nécessaire de télécharger son archive disponible sur cette page : <a href="https://github.com/ForumHulp/helper" target="_blank">Forumhulp Helper</a>, puis de l’envoyer sur son espace FTP et de l’activer.',
 ));
