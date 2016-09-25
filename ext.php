@@ -32,13 +32,16 @@ class ext extends \phpbb\extension\base
 		switch ($old_state)
 		{
 			case '': // Empty means nothing has run yet
-				if (empty($old_state))
-				{
-					global $user, $template;
-					$user->add_lang_ext('forumhulp/errorpages', 'info_acp_errorpages');
-					$template->assign_var('L_EXTENSION_ENABLE_SUCCESS', $user->lang['EXTENSION_ENABLE_SUCCESS'] . (isset($user->lang['ERRORPAGE_NOTICE']) ?
-							sprintf($user->lang['ERRORPAGE_NOTICE'], $user->lang['ACP_CAT_GENERAL'], $user->lang['ACP_BOARD_CONFIGURATION'], $user->lang['ACP_BOARD_FEATURES']) : ''));
-				}
+			if (empty($old_state))
+			{
+				$this->container->get('user')->add_lang_ext('forumhulp/errorpages', 'info_acp_errorpages');
+				$this->container->get('template')->assign_var('L_EXTENSION_ENABLE_SUCCESS', $this->container->get('user')->lang['EXTENSION_ENABLE_SUCCESS'] .
+				(isset($this->container->get('user')->lang['ERRORPAGE_NOTICE']) ?
+						sprintf($this->container->get('user')->lang['ERRORPAGE_NOTICE'],
+							$this->container->get('user')->lang['ACP_CAT_GENERAL'],
+							$this->container->get('user')->lang['ACP_BOARD_CONFIGURATION'],
+							$this->container->get('user')->lang['ACP_BOARD_FEATURES']) : ''));
+			}
 
 				// Run parent enable step method
 				return parent::enable_step($old_state);
