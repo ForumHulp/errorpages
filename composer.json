@@ -30,8 +30,8 @@
         },
         "version-check": {
 			"host": "forumhulp.com",
-			"directory": "/ext",
-			"filename": "index.php?id=35"
+			"directory": "/versioncheck",
+			"filename": "error-pages"
         }
     }
 }
