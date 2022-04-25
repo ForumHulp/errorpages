@@ -12,6 +12,7 @@ namespace forumhulp\errorpages\event;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class listener implements EventSubscriberInterface
 {
@@ -35,8 +36,9 @@ class listener implements EventSubscriberInterface
 		// Get the exception object from the received event
 		$exception = $event->getException();
 		$request = $event->getRequest();
+		$status_code = $exception instanceof HttpExceptionInterface ? $exception->getStatusCode() : 500;
 
-		switch ($exception->getStatusCode())
+		switch ($status_code)
 		{
 			case '400':
 				$msg = 'ERROR_BAD_REQUEST';
@@ -110,7 +112,7 @@ class listener implements EventSubscriberInterface
 			break;
 		}
 
-		($this->config['error_pages_log']) ? $this->log->add('critical', $this->user->data['user_id'], $this->user->data['session_ip'], 'LOG_GENERAL_ERROR', false, array($exception->getStatusCode() . ': ' . $this->user->lang[$msg], $request->getPathInfo())) : null;
+		($this->config['error_pages_log']) ? $this->log->add('critical', $this->user->data['user_id'], $this->user->data['session_ip'], 'LOG_GENERAL_ERROR', false, array($status_code . ': ' . $this->user->lang[$msg], $request->getPathInfo())) : null;
 
 		page_header($this->user->lang('INFORMATION'));
 		$this->template->assign_vars(array(
@@ -123,7 +125,6 @@ class listener implements EventSubscriberInterface
 		));
 		page_footer(true, false, false);
 
-		$status_code = $exception instanceof HttpException ? $exception->getStatusCode() : 500;
 		$response = new Response($this->template->assign_display('body'), $status_code);
 		$event->setResponse($response);
 	}
