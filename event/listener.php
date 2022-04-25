@@ -61,7 +61,7 @@ class listener implements EventSubscriberInterface
 		    '504' => 'GATEWAY_TIMOUT',
 		    '505' => 'HTTP_VERSION_NOT_SUPPORTED',
 		];
-		$msg = (isset($error_messages_list[ $status_code ]) ? $error_messages_list[ $status_code ] : 'ERROR_UNKNOWN');
+		$msg = (isset($error_messages_list[ $exception->getStatusCode() ]) ? $error_messages_list[ $status_code ] : 'ERROR_UNKNOWN');
 
 		($this->config['error_pages_log']) ? $this->log->add('critical', $this->user->data['user_id'], $this->user->data['session_ip'], 'LOG_GENERAL_ERROR', false, array($exception->getStatusCode() . ': ' . $this->user->lang[$msg], $request->getPathInfo())) : null;
 
