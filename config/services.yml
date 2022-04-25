@@ -2,15 +2,15 @@ services:
     kernel.listener.forumhulp_errorpages:
         class: forumhulp\errorpages\event\listener
         arguments:
-            - @config
-            - @user
-            - @template
-            - @log
+            - '@config'
+            - '@user'
+            - '@template'
+            - '@log'
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
     forumhulp.errorpages.acp_listener:
         class: forumhulp\errorpages\event\acp_listener
         arguments:
-            - @controller.helper
+            - '@controller.helper'
         tags:
             - { name: event.listener }
